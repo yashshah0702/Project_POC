@@ -5,6 +5,8 @@ const defineModels = require('./src/model');
 const dbConfig = require('./src/config/db.config'); // Import the config
 const routes = require('./src/route')
 
+const port = process.env.PORT || 3000;
+
 const sequelize = new Sequelize(
   dbConfig.database,
   dbConfig.username,
@@ -34,7 +36,7 @@ app.get('/', (req, res) => {
 
 sequelize.sync({alter:true,logging:false}).then(() => {
   console.log('All tables synced!');
-  app.listen(process.env.PORT, () => console.log(`Server running on port ${process.env.PORT}`));
+  app.listen(port, () => console.log(`Server running on port ${port}`));
 }).catch(err => {
   console.error('Unable to sync database:', err);
 });

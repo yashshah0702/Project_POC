@@ -5,10 +5,11 @@ exports.createMessage = async (req, res) => {
     try {
      const {  text } = req.body;
   const userId = req.userId;
+  const {name,upn} = req.user;
   const { Message, Activity } = req.models;
-  const message = await Message.create({ userId, text });
+  const message = await Message.create({ userId, text , userName:name,userEmail:upn });
   // Also track activity
-  await Activity.create({ userId, type: globalConstants.enumActivity.MessageSent , description: serverResponseMessage.MESSAGE_SENT });
+  await Activity.create({ userId, type: globalConstants.enumActivity.MessageSent , description: serverResponseMessage.MESSAGE_CREATED , userName:name,userEmail:upn });
   return response.success(
       res,
       httpsStatusCodes.SUCCESS,
@@ -16,7 +17,6 @@ exports.createMessage = async (req, res) => {
       message
     );
     
-
     } catch (error) {
     return response.failure(
       res,

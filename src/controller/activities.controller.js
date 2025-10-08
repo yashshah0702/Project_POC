@@ -38,7 +38,6 @@ exports.logoutActivity = async (req, res) => {
       activities
     );
     } catch (error) {
-        console.log(error);
     return response.failure(
       res,
       httpsStatusCodes.INTERNAL_SERVER_ERROR,

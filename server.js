@@ -34,6 +34,7 @@ app.get('/', (req, res) => {
 });
 
 
+
 sequelize.sync({alter:true,logging:false}).then(() => {
   console.log('All tables synced!');
   app.listen(port, () => console.log(`Server running on port ${port}`));

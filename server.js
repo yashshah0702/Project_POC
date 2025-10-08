@@ -36,7 +36,7 @@ app.use((req, res, next) => {
 app.use('/api', routes);
 
 app.get('/', (req, res) => {
-  res.send('Server is started and running successfully...');
+  res.send('Server is started and running successfully, please check now...');
 });
 
 

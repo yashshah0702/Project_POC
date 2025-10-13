@@ -1,3 +1,4 @@
+require('dotenv').config({ quiet: true });
 const { response } = require("../utils");
 const { httpsStatusCodes, serverResponseMessage, globalConstants } = require("../constants");
 const { BlobServiceClient } = require('@azure/storage-blob');
@@ -14,16 +15,7 @@ function getMimeTypeFromBase64(base64String) {
 }
 
 function getFileExtension(mimeType) {
-  const map = {
-    "image/jpeg": "jpg",
-    "image/png": "png",
-    "image/gif": "gif",
-    "image/webp": "webp",
-    "video/mp4": "mp4",
-    "video/quicktime": "mov",
-    "video/x-msvideo": "avi",
-    "video/x-matroska": "mkv"
-  };
+  const {map} = globalConstants
   return map[mimeType] || null;
 }
 
@@ -38,15 +30,13 @@ exports.createMessage = async (req, res) => {
     if (fileUrl) {
       // Validate file type
       const mimeType = getMimeTypeFromBase64(fileUrl);
-      const allowedMimeTypes = [
-        "image/jpeg", "image/png", "image/gif", "image/webp",
-        "video/mp4", "video/quicktime", "video/x-msvideo", "video/x-matroska"
-      ];
+      const allowedMimeTypes = globalConstants.allowedFileTypes;
       if (!allowedMimeTypes.includes(mimeType)) {
         return response.failure(
           res,
           httpsStatusCodes.BAD_REQUEST,
-          "Only images and videos are allowed."
+          serverResponseMessage.IMAGES_VIDEOS_ONLY,
+          []
         );
       }
 

@@ -1,5 +1,5 @@
 exports.success = function (res,code, message, data) {
-    return res.json({
+    return res.status(code).json({
         message,
         status: 'Success',
         code,
@@ -8,7 +8,7 @@ exports.success = function (res,code, message, data) {
 };
 
 exports.failure = function (res,code, message, data) {
-    return res.json({
+    return res.status(code).json({
         message,
         status: 'Failure',
         code,

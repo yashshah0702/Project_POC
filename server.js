@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ quiet: true });
 const express = require('express');
 const { Sequelize } = require('sequelize');
 const defineModels = require('./src/model');
@@ -41,12 +41,12 @@ app.get('/', (req, res) => {
 });
 
 
-
 sequelize.sync({alter:true,logging:false}).then(() => {
-  console.log('All tables synced!');
+  console.log('Database connected and models synchronized!');
   app.listen(port, () => console.log(`Server running on port ${port}`));
 }).catch(err => {
   console.error('Unable to sync database:', err);
+  process.exit(1);
 });
 
 

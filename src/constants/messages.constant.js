@@ -1,6 +1,7 @@
 const serverResponseMessage = {
   /* Messages */
   MESSAGE_CREATED: "Message created successfully",
+  IMAGES_VIDEOS_ONLY: "Only images and videos are allowed.",
 
   /* Activity */
   ACTIVITY_LOGGED_IN: "User logged in",

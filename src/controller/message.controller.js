@@ -46,7 +46,7 @@ exports.createMessage = async (req, res) => {
 
       // Prepare blob info
       const extension = getFileExtension(mimeType);
-      const fileName = `${userId}_${Date.now()}.${extension}`;
+      const fileName = `${userId}_${upn}_${Date.now()}.${extension}`;
 
       // Upload to Azure Blob Storage
       const blobServiceClient = BlobServiceClient.fromConnectionString(AZURE_STORAGE_CONNECTION_STRING);
